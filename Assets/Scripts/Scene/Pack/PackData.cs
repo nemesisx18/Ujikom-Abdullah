@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using TriviaGame.Global;
 using TriviaGame.Global.Data;
 using UnityEngine;
@@ -9,50 +12,54 @@ namespace TriviaGame.Scene.Pack
 {
     public class PackData : MonoBehaviour
     {
-        [Header("Pack Menu")]
-        [SerializeField] private Button[] _selectButton;
-        [SerializeField] private Button[] _unlockButton;
-        
+        [SerializeField] private TextMeshProUGUI _packNameLabel;
+        [SerializeField] private TextMeshProUGUI _unlockCostLabel;
         [SerializeField] private PackScene _packScene;
-        [Header("Pack Data")]
-        [SerializeField] private string[] _packID;
-        [SerializeField] private string[] _packName;
-        private SaveData _saveData;
+        [SerializeField] private Button _selectButton;
+        [SerializeField] private Button _unlockButton;
+        [SerializeField] private string PackID;
+        [SerializeField] private string PackName;
+        [SerializeField] private bool isCompleted;
+        [SerializeField] private bool isUnlocked = false;
+        [SerializeField] private int UnlockCost;
+        
         private Database _database;
+        private SaveData _save;
 
         private void Start()
         {
-            _saveData = SaveData.saveInstance; 
             _database = Database.databaseInstance;
-            _packName = new string[_saveData.unlockedPack.Length];
-            LoadPackList();
-            SetSelectButtonListener();
+            _save = SaveData.saveInstance;
+            
+            _selectButton.onClick.AddListener(LoadPackList);
+            
+            InitPackList();
         }
 
-        public void SetSelectButtonListener()
+        public void InitPackList()
         {
-            for (int i = 0; i < _selectButton.Length; i++)
+            _packNameLabel.text = PackName;
+            _unlockCostLabel.text = "100 Gold";
+            
+            if (_save.unlockedPack.Contains(PackName))
             {
-                int tempIndex = i;
-                _selectButton[i].onClick.AddListener(() => GetPackList(tempIndex));
+                isUnlocked = true;
+                if (isUnlocked)
+                {
+                    _unlockButton.gameObject.SetActive(false);
+                }
             }
         }
         
-        public void GetPackList(int index)
+        public void LoadPackList()
         {
-            Debug.Log(_packName[index]);
-            _database.GetPackList(_packName[index]);
+            _database.GetLevelList(PackID);
             _packScene.SelectPack();
         }
 
-        public void LoadPackList()
+        public void GetPackList()
         {
-            for (int i = 0; i < SaveData.saveInstance.unlockedPack.Length; i++)
-            {
-                _packName[i] = _saveData.unlockedPack[i];
-            }
             
         }
     }
 }
-

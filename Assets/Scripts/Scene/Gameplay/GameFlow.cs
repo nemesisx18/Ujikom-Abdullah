@@ -9,7 +9,6 @@ namespace TriviaGame.Scene.Gameplay
 {
     public class GameFlow : MonoBehaviour
     {
-        
     }
 }
 

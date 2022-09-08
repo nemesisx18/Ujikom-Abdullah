@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using TriviaGame.Global;
 using TriviaGame.Global.Data;
@@ -10,9 +12,10 @@ namespace TriviaGame.Scene.Level
 {
     public class LevelData : MonoBehaviour
     {
-        [SerializeField] private Button[] _selectButton;
-        
-        [SerializeField] private string[] _levelID;
+        [SerializeField] private TextMeshProUGUI _levelNameLabel;
+        [SerializeField] private Image _completedImage;
+        [SerializeField] private Button _selectButton;
+        [SerializeField] private string _levelID;
         [SerializeField] private string _levelName;
         [SerializeField] private bool _isCompleted;
         private SaveData _saveData;
@@ -20,33 +23,48 @@ namespace TriviaGame.Scene.Level
 
         [SerializeField] private LevelScene _levelScene;
 
-        private void Start()
+        private void Awake()
         {
             _saveData = SaveData.saveInstance; 
             _database = Database.databaseInstance;
-            _levelName = _database.PackID;
-            _levelID = new string[_database.LevelPack.LevelLists.Length];
-            
-            for (int i = 0; i < _selectButton.Length; i++)
-            {
-                _selectButton[i].GetComponentInChildren<TextMeshProUGUI>().text = _database.LevelPack.LevelLists[i].name;
-            }
-            
+        }
+
+        private void Start()
+        {
             SetSelectButtonListener();
+        }
+
+        public void Init(LevelScene ls)
+        {
+            _levelScene = ls;
         }
 
         public void SetSelectButtonListener()
         {
-            for (int i = 0; i < _selectButton.Length; i++)
-            {
-                int tempIndex = i;
-                _selectButton[i].onClick.AddListener(() => GetPackList(tempIndex));
-            }
+            _selectButton.onClick.AddListener(LoadPackList);
         }
         
-        public void GetPackList(int index)
+        public void SetLevelName(int index)
         {
-            _database.GetLevelData(_levelID[index]);
+            Debug.Log(Database.databaseInstance.Levels[index]);
+            _levelName = _database.Levels[index];
+            _levelNameLabel.text = "Level " + _levelName;
+            InitLevelList();
+        }
+        
+        public void InitLevelList()
+        {
+            _levelID = _database.levelStruct.LevelPackID;
+            if (_saveData.completedLevel.Contains(_levelName))
+            {
+                _isCompleted = true;
+            }
+            _completedImage.gameObject.SetActive(_isCompleted);            
+        }
+        
+        public void LoadPackList()
+        {
+            _database.GetLevelData(_levelName);
             _levelScene.SelectLevel();
         }
     }

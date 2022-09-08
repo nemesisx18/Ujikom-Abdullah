@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 522c17b6d7e27a9468620d8057c81c8d, type: 3}
-  m_Name: Level B-5
+  m_Script: {fileID: 11500000, guid: 57f2471211834c9ea6d6de5aae0025f5, type: 3}
+  m_Name: B-5
   m_EditorClassIdentifier: 
-  levelID: A-1
+  levelID: B-5
+  packID: B
   question: Warna dari Mawar
-  hint: {fileID: 21300000, guid: 601f12bc0fc14274dbb82ec03afb7528, type: 3}
+  hint: rose
   choice:
   - Merah
   - Biru
