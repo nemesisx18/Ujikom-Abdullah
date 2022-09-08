@@ -8,11 +8,9 @@ namespace TriviaGame.Global
     public class SaveData : MonoBehaviour
     {
         public int coin;
-        public string[] unlockedPack;
-        public string[] completedPack;
+        public List <string> unlockedPack = new List<string>();
+        public List <string> completedPack = new List<string>();
         public List <string> completedLevel = new List<string>();
-        public string[] allPack;
-
         public static SaveData saveInstance;
         
         private const string _prefsKey = "TriviaProgress";
@@ -34,11 +32,13 @@ namespace TriviaGame.Global
         private void OnEnable()
         {
             EventManager.StartListening("FinishLevel", UpdateLevel);
+            EventManager.StartListening("UnlockPack", UnlockPack);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening("FinishLevel", UpdateLevel);
+            EventManager.StopListening("UnlockPack", UnlockPack);
         }
 
         private void UpdateLevel(object data)
@@ -46,6 +46,21 @@ namespace TriviaGame.Global
             string level = (string)data;
             completedLevel.Add(level);
             Save();
+        }
+        
+        private void UnlockPack(object pack)
+        {
+            string packName = (string)pack;
+            if (!unlockedPack.Contains(packName))
+            {
+                unlockedPack.Add(packName);
+            }
+            Save();
+        }
+
+        public void UpdateCoin(int amount)
+        {
+            coin = amount;
         }
 
         public void Load()

@@ -24,7 +24,7 @@ namespace TriviaGame.Scene.Pack
         {
             _saveData = SaveData.saveInstance; 
             _database = Database.databaseInstance;
-            _packName = new string[_saveData.unlockedPack.Length];
+            _packName = new string[_saveData.unlockedPack.Count];
             LoadPackList();
             SetSelectButtonListener();
         }
@@ -47,7 +47,7 @@ namespace TriviaGame.Scene.Pack
 
         public void LoadPackList()
         {
-            for (int i = 0; i < SaveData.saveInstance.unlockedPack.Length; i++)
+            for (int i = 0; i < SaveData.saveInstance.unlockedPack.Count; i++)
             {
                 _packName[i] = _saveData.unlockedPack[i];
             }

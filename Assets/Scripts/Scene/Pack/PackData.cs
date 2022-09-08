@@ -32,6 +32,7 @@ namespace TriviaGame.Scene.Pack
             _save = SaveData.saveInstance;
             
             _selectButton.onClick.AddListener(LoadPackList);
+            _unlockButton.onClick.AddListener(GetPackList);
             
             InitPackList();
         }
@@ -39,7 +40,7 @@ namespace TriviaGame.Scene.Pack
         public void InitPackList()
         {
             _packNameLabel.text = PackName;
-            _unlockCostLabel.text = "100 Gold";
+            _unlockCostLabel.text = UnlockCost.ToString();
             
             if (_save.unlockedPack.Contains(PackName))
             {
@@ -49,17 +50,40 @@ namespace TriviaGame.Scene.Pack
                     _unlockButton.gameObject.SetActive(false);
                 }
             }
+            else
+            {
+                _selectButton.interactable = false;
+            }
         }
         
         public void LoadPackList()
         {
-            _database.GetLevelList(PackID);
-            _packScene.SelectPack();
+            if(isUnlocked)
+            {
+                _database.GetLevelList(PackID);
+                _packScene.SelectPack();
+            }
+            else
+            {
+                Debug.Log("Pack is locked");
+            }
+            
         }
 
         public void GetPackList()
         {
-            
+            if (_save.coin >= UnlockCost)
+            {
+                Currency.currencyInstance.SpendCoin(UnlockCost);
+                EventManager.TriggerEvent("UnlockPack", PackName);
+                _unlockButton.gameObject.SetActive(false);
+                _selectButton.interactable = true;
+                isUnlocked = true;
+            }
+            else
+            {
+                Debug.Log("Not enough coin");
+            }
         }
     }
 }

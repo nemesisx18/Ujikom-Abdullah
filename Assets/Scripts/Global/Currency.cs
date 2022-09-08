@@ -6,16 +6,46 @@ namespace TriviaGame.Global
 {
     public class Currency : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public static Currency currencyInstance;
 
+        public int coin;
+        private SaveData _saveData;
+
+        private void Awake()
+        {
+            if(currencyInstance != null && currencyInstance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                currencyInstance = this;
+                DontDestroyOnLoad(this);
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
+            _saveData = SaveData.saveInstance;
+            GetCoin();
+        }
 
+        private void GetCoin()
+        {
+            coin = _saveData.coin;
+            Debug.Log(coin);
+        }
+
+        public void AddCoin(int amount)
+        {
+            coin += amount;
+            _saveData.UpdateCoin(coin);
+        }
+
+        public void SpendCoin(int amount)
+        {
+            coin -= amount;
+            _saveData.UpdateCoin(coin);
         }
     }
 }
