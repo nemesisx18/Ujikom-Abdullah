@@ -12,5 +12,6 @@ namespace TriviaGame.Global.Data
         [SerializeField] private int _unlockCost;
         
         public string PackId => _packId;
+        public LevelListData[] LevelLists => _levelLists;
     }
 }

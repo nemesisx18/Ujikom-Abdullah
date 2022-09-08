@@ -26,10 +26,9 @@ namespace TriviaGame.Scene.Pack
             SceneManager.LoadScene("Home");
         }
 
-        public void SelectPack(string packID)
+        public void SelectPack()
         {
-            // Database.databaseInstance.GetPackData(packID);
-            // SceneManager.LoadScene("Level");
+            SceneManager.LoadScene("Level");
         }
     }
 }

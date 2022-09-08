@@ -18,10 +18,12 @@ namespace TriviaGame.Scene.Pack
         [SerializeField] private string[] _packID;
         [SerializeField] private string[] _packName;
         private SaveData _saveData;
+        private Database _database;
 
         private void Start()
         {
             _saveData = SaveData.saveInstance; 
+            _database = Database.databaseInstance;
             _packName = new string[_saveData.unlockedPack.Length];
             LoadPackList();
             SetSelectButtonListener();
@@ -32,15 +34,15 @@ namespace TriviaGame.Scene.Pack
             for (int i = 0; i < _selectButton.Length; i++)
             {
                 int tempIndex = i;
-                _selectButton[i].onClick.AddListener(() => SelectPack(tempIndex));
+                _selectButton[i].onClick.AddListener(() => GetPackList(tempIndex));
             }
         }
         
-        public void SelectPack(int index)
+        public void GetPackList(int index)
         {
-            Debug.Log(index + 1);
-            // Resources.Load<LevelPack>("Pack/" + _packID[index]);
-            // _packScene.SelectPack(_pack.PackId);
+            Debug.Log(_packName[index]);
+            _database.GetPackList(_packName[index]);
+            _packScene.SelectPack();
         }
 
         public void LoadPackList()

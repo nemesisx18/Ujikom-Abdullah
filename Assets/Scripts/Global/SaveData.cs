@@ -10,6 +10,7 @@ namespace TriviaGame.Global
         public string[] unlockedPack;
         public string[] completedPack;
         public string[] completedLevel;
+        public string[] allPack;
 
         public static SaveData saveInstance;
         

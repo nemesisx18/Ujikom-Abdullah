@@ -24,6 +24,11 @@ namespace TriviaGame.Scene.Level
         {
             SceneManager.LoadScene("Pack");
         }
+
+        public void SelectLevel()
+        {
+            SceneManager.LoadScene("Gameplay");
+        }
     }
 }
 

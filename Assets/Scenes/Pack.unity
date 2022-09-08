@@ -777,9 +777,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin: 0
   unlockedPack:
-  - Level A
+  - A
   completedPack: []
   completedLevel: []
+  allPack:
+  - A
+  - B
+  - C
+  - D
 --- !u!4 &711476392
 Transform:
   m_ObjectHideFlags: 0
@@ -793,7 +798,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747191394
 GameObject:
@@ -996,7 +1001,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &901709043
 GameObject:
@@ -1326,7 +1331,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637655282
 GameObject:
@@ -1393,11 +1398,7 @@ MonoBehaviour:
   - {fileID: 597963302}
   _unlockButton: []
   _packScene: {fileID: 1637655283}
-  _packID:
-  - Level A
-  - Level B
-  - Level C
-  - Level D
+  _packID: []
   _packName: []
 --- !u!1 &1721327541
 GameObject:

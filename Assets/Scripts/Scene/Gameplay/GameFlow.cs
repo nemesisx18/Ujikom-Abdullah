@@ -1,22 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TriviaGame.Global;
+using TriviaGame.Global.Data;
 using UnityEngine;
 
 namespace TriviaGame.Scene.Gameplay
 {
     public class GameFlow : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
         
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }
 

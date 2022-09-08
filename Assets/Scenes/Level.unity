@@ -1483,6 +1483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604426735}
   - component: {fileID: 1604426734}
+  - component: {fileID: 1604426736}
   m_Layer: 0
   m_Name: LevelScene
   m_TagString: Untagged
@@ -1519,6 +1520,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1604426736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604426733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4976950a6bd19c04d9816709765ca5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectButton:
+  - {fileID: 657061717}
+  - {fileID: 242784415}
+  - {fileID: 154445323}
+  - {fileID: 700085006}
+  - {fileID: 1689132993}
+  _levelID: []
+  _levelName: 
+  _isCompleted: 0
+  _levelScene: {fileID: 1604426734}
 --- !u!1 &1689132991
 GameObject:
   m_ObjectHideFlags: 0

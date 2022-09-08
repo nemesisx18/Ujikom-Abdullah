@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f2471211834c9ea6d6de5aae0025f5, type: 3}
   m_Name: A-5
   m_EditorClassIdentifier: 
-  levelID: A-1
-  packID: Level A
+  levelID: A-5
+  packID: A
   question: Warna dari Laut
   hint: ocean
   choice:

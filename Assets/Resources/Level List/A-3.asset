@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: A-3
   m_EditorClassIdentifier: 
   levelID: A-3
-  packID: Level A
+  packID: A
   question: Warna dari Daun
   hint: leaf
   choice:

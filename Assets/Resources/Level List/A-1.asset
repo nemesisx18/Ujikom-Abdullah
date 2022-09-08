@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: A-1
   m_EditorClassIdentifier: 
   levelID: A-1
-  packID: Level A
+  packID: A
   question: Warna dari Mawar
   hint: rose
   choice:

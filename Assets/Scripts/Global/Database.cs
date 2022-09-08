@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TriviaGame.Global.Data;
@@ -9,6 +10,12 @@ namespace TriviaGame.Global.Data
     public class Database : MonoBehaviour
     {
         public static Database databaseInstance;
+        private LevelStruct _levelStruct;
+        [SerializeField] private LevelPack _levelPack;
+        [SerializeField] private string _packID;
+        
+        public LevelPack LevelPack => _levelPack;
+        public string PackID => _packID;
         
         private void Awake()
         {
@@ -21,6 +28,27 @@ namespace TriviaGame.Global.Data
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            _levelStruct = new LevelStruct();
+        }
+
+        public void GetPackList(string packID)
+        {
+            _packID = packID; 
+            _levelPack = Resources.Load<LevelPack>("Pack/" + packID);
+        }
+
+        public void GetLevelList(string packID)
+        {
+            _levelStruct.LevelPackID = packID;
+        }
+        
+        public void GetLevelData(string levelID)
+        {
+            _levelStruct.LevelID = levelID;
         }
     }
 }
