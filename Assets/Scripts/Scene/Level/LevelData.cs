@@ -17,6 +17,7 @@ namespace TriviaGame.Scene.Level
         [SerializeField] private Button _selectButton;
         [SerializeField] private string _levelID;
         [SerializeField] private string _levelName;
+        public string nextLevel;
         [SerializeField] private bool _isCompleted;
         private SaveData _saveData;
         private Database _database;

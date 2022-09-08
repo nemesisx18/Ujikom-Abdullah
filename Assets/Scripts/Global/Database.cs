@@ -11,11 +11,13 @@ namespace TriviaGame.Global.Data
     {
         [SerializeField] private LevelPack _levelPack;
         [SerializeField] private string[] levels;
+        [SerializeField] private int _currentLevel;
         public static Database databaseInstance;
         private LevelStruct _levelStruct;
 
         public LevelStruct levelStruct => _levelStruct;
         public LevelPack LevelPack => _levelPack;
+        public int CurrentLevel => _currentLevel;
         public string[] Levels => levels;
         private void Awake()
         {
@@ -45,11 +47,10 @@ namespace TriviaGame.Global.Data
             }
         }
 
-        // public void GetPackList(string packID)
-        // {
-        //     _packID = packID; 
-        //     _levelPack = Resources.Load<LevelPack>("Pack/" + packID);
-        // }
+        public void SetCurrentLevel(int index)
+        {
+            _currentLevel = index;
+        }
 
         public void GetLevelList(string packID)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TriviaGame.Global;
 using UnityEngine;
 
 namespace TriviaGame.Scene.Gameplay
@@ -8,8 +9,7 @@ namespace TriviaGame.Scene.Gameplay
     public class Countdown : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _countdownText;
-        
-        private float _timer;
+        [SerializeField] private float _timer;
         private bool _isCountingDown;
         private bool _isCountdownFinished;
         
@@ -45,6 +45,7 @@ namespace TriviaGame.Scene.Gameplay
         public void FinishCountdown()
         {
             _isCountdownFinished = true;
+            EventManager.TriggerEvent("TimeUp");
         }
     }
 }

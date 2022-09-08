@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using TriviaGame.Global;
 using TriviaGame.Global.Data;
@@ -12,6 +13,7 @@ namespace TriviaGame.Scene.Gameplay
 {
     public class Quiz : MonoBehaviour
     {
+        [SerializeField] private int currentIndex;
         [SerializeField] private string _currentLevel;
         [SerializeField] private TextMeshProUGUI _questionText;
         [SerializeField] private LevelDatabase _levelDatabase;
@@ -20,8 +22,9 @@ namespace TriviaGame.Scene.Gameplay
 
         private void Start()
         {
-            Debug.Log(Database.databaseInstance.levelStruct.LevelID);
-            InitQuiz();
+            currentIndex = Database.databaseInstance.CurrentLevel;
+
+            InitQuiz(currentIndex);
             
             SetAnswerButtonListener();
         }
@@ -37,10 +40,10 @@ namespace TriviaGame.Scene.Gameplay
             }
         }
 
-        public void InitQuiz()
+        public void InitQuiz(int index)
         {
             _levelDatabase =
-                Resources.Load<LevelDatabase>("Level List/"+Database.databaseInstance.levelStruct.LevelID);
+                Resources.Load<LevelDatabase>("Level List/"+Database.databaseInstance.Levels[index]);
 
             _hintImage.sprite = Resources.Load<Sprite>("Hint/" + _levelDatabase.hint);
             _questionText.text = _levelDatabase.question;
@@ -57,6 +60,15 @@ namespace TriviaGame.Scene.Gameplay
             {
                 Debug.Log("Correct");
                 EventManager.TriggerEvent("FinishLevel", _currentLevel);
+                int nextIndex = currentIndex + 1;
+                if (nextIndex < Database.databaseInstance.Levels.Length)
+                {
+                    InitQuiz(currentIndex + 1);
+                }
+                else
+                {
+                    SceneManager.LoadScene("Pack");
+                }
             }
             else
             {
