@@ -1,21 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using TriviaGame.Global;
+using TriviaGame.Global.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TriviaGame.Scene.Pack
 {
     public class PackData : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [Header("Pack Menu")]
+        [SerializeField] private Button[] _selectButton;
+        [SerializeField] private Button[] _unlockButton;
         
+        [SerializeField] private PackScene _packScene;
+        [Header("Pack Data")]
+        [SerializeField] private string[] _packID;
+        [SerializeField] private string[] _packName;
+        private SaveData _saveData;
+
+        private void Start()
+        {
+            _saveData = SaveData.saveInstance; 
+            _packName = new string[_saveData.unlockedPack.Length];
+            LoadPackList();
+            SetSelectButtonListener();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void SetSelectButtonListener()
         {
+            for (int i = 0; i < _selectButton.Length; i++)
+            {
+                int tempIndex = i;
+                _selectButton[i].onClick.AddListener(() => SelectPack(tempIndex));
+            }
+        }
         
+        public void SelectPack(int index)
+        {
+            Debug.Log(index + 1);
+            // Resources.Load<LevelPack>("Pack/" + _packID[index]);
+            // _packScene.SelectPack(_pack.PackId);
+        }
+
+        public void LoadPackList()
+        {
+            for (int i = 0; i < SaveData.saveInstance.unlockedPack.Length; i++)
+            {
+                _packName[i] = _saveData.unlockedPack[i];
+            }
+            
         }
     }
 }

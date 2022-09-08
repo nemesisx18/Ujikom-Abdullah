@@ -6,16 +6,34 @@ namespace TriviaGame.Global
 {
     public class SaveData : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public int coin;
+        public string[] unlockedPack;
+        public string[] completedPack;
+        public string[] completedLevel;
+
+        public static SaveData saveInstance;
         
+        private void Awake()
+        {
+            if (saveInstance == null)
+            {
+                saveInstance = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Load()
         {
+            
+        }
         
+        public void Save()
+        {
+            
         }
     }
 }
