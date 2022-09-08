@@ -19,6 +19,7 @@ namespace TriviaGame.Scene.Level
         [SerializeField] private string _levelName;
         public string nextLevel;
         [SerializeField] private bool _isCompleted;
+        [SerializeField] private int buttonIndex;
         private SaveData _saveData;
         private Database _database;
 
@@ -49,6 +50,7 @@ namespace TriviaGame.Scene.Level
         {
             Debug.Log(Database.databaseInstance.Levels[index]);
             _levelName = _database.Levels[index];
+            buttonIndex = index;
             _levelNameLabel.text = "Level " + _levelName;
             InitLevelList();
         }
@@ -66,6 +68,7 @@ namespace TriviaGame.Scene.Level
         public void LoadPackList()
         {
             _database.GetLevelData(_levelName);
+            _database.SetCurrentLevel(buttonIndex);
             _levelScene.SelectLevel();
         }
     }

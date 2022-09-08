@@ -61,14 +61,6 @@ namespace TriviaGame.Scene.Gameplay
                 Debug.Log("Correct");
                 EventManager.TriggerEvent("FinishLevel", _currentLevel);
                 int nextIndex = currentIndex + 1;
-                if (nextIndex < Database.databaseInstance.Levels.Length)
-                {
-                    InitQuiz(currentIndex + 1);
-                }
-                else
-                {
-                    SceneManager.LoadScene("Pack");
-                }
             }
             else
             {
